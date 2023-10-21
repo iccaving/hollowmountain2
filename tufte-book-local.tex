@@ -1,0 +1,290 @@
+\RequirePackage{etoolbox}
+\makeatletter
+\newif\if@tufte@margtab\@tufte@margtabfalse
+\AtBeginEnvironment{margintable}{\@tufte@margtabtrue}
+\AtEndEnvironment{margintable}{\@tufte@margtabfalse}
+
+\newcommand{\classiccaptionstyle}{%
+    \long\def\@caption##1[##2]##3{%
+        \par
+        \addcontentsline{\csname ext@##1\endcsname}{##1}%
+        {\protect\numberline{\csname the##1\endcsname}{\ignorespaces ##2}}%
+        \begingroup
+        \@parboxrestore
+        \if@minipage
+        \@setminipage
+        \fi
+        \normalsize
+        \@makecaption{\csname fnum@##1\endcsname}{\ignorespaces ##3}\par
+        \endgroup}
+    \long\def\@makecaption##1##2{%
+        \vskip\abovecaptionskip
+        \sbox\@tempboxa{\@tufte@caption@font##1: ##2}%
+        \ifdim \wd\@tempboxa >\hsize
+        \@tufte@caption@font\if@tufte@margtab\@tufte@caption@justification\fi##1: ##2\par
+        \else
+        \global \@minipagefalse
+        \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+        \fi
+        \vskip\belowcaptionskip}
+       \setcaptionfont{\normalfont}
+    \let\caption\@tufte@orig@caption%
+    \let\label\@tufte@orig@label}
+\makeatother
+
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+    fileext=los,
+    listname={List of Surveys},
+    name=Survey,
+    placement=tbhp,
+    within=none,
+]{survey}
+
+\newenvironment{pagesurvey}{% This enables the full width captions.
+    \protect\begin{survey*}[b]
+    \classiccaptionstyle
+  }{\protect\end{survey*}}
+
+\DeclareFloatingEnvironment[
+    fileext=lom,
+    listname={List of Maps},
+    name=Map,
+    placement=tbhp,
+    within=none,
+]{map}
+\newenvironment{pagemap}{% This enables the full width captions.
+    \protect\begin{map*}[b]
+    \classiccaptionstyle
+  }{\protect\end{map*}}
+
+
+
+
+%____________________ MORE FORMATTING OPTIONS
+
+
+%indexing the passage names and highlighting them in some way the new command is simply \passage{}
+%If using passage in the caption environment - \protect\passage{} will work.
+%THis also takes an optional argument \passage[detail]{name} if you want to refer to e.g. Primadona abseil, instead of cave, or entrance in the index. 
+%Also, you can use \passage[|see{other}]{name} if you really want something specific like Mig see --Migovec for instance
+
+
+
+
+\newcommand{\name}[1]{\vskip1ex\nopagebreak{\raggedleft\large\sffamily\textbf{#1}\par \vskip1ex} \index[aut]{#1|BH} \rmfamily}
+
+\newcommand{\figref}[1]{(Figure \protect\vref{#1})}
+\newcommand{\mapref}[1]{(Map \protect\vref{#1})}
+\newcommand{\survref}[1]{(Survey \protect\vref{#1})}
+
+\newcommand{\figpageref}[1]{(Figure \protect\ref{#1} on page \protect\pageref{1})}
+
+\definecolor{thirdblue}{cmyk}{0.97, 0.28, 0, 0.71}
+
+
+%A handy little command which takes inline text as argument and copies it in the margin as a snippet. Useful to highlight stuff and fill margins
+
+\newcommand{\bignote}[1]{\marginnote{\sffamily\normalsize{\textmd{\textit{\flushleft{\textcolor{thirdblue}{...#1...}}}}}%
+\rmfamily}#1}
+
+%Use mininame for authors in margin only tikzboxes, otherwise linespacing was changed by the larger font names.
+\newcommand{\mininame}[1]{\vskip2ex\nopagebreak{\raggedleft\footnotesize\sffamily\textbf{#1}\par} \index[aut]{#1|BH} \rmfamily}
+
+\renewcommand{\emph}[1]{\textit{#1}}
+
+%If caption runs at bottom of page - use pagefigure environment instead of figure* !
+\newenvironment{pagefigure}{% This enables the full width captions.
+    \protect\begin{figure*}[b]
+    \classiccaptionstyle
+  }{\protect\end{figure*}}
+
+%_____________________Definition of the color box environment for the main title pages...
+\usepackage[most]{tcolorbox}
+
+\tcbset{    frame code={}
+            center title,
+            left=10pt,
+            right=10pt,
+            top=-50pt,
+            bottom=10pt,
+            colback=white,
+            colframe=white,
+        width=\dimexpr\textwidth\relax,
+            enlarge left by=0mm,
+            boxsep=5pt,
+            arc=0pt,outer arc=0pt,
+            opacityback=0.7
+        }
+        
+
+%__________________Definition of the Tikz environments for side stories and fancy tables
+\usepackage{tikz}
+\usetikzlibrary{shapes,snakes}
+
+\tikzstyle{recipe} = [   draw=thirdblue!80, 
+                    fill=thirdblue!20, 
+                    thick,
+                    rectangle, 
+                    rounded corners, 
+                    inner sep=5pt, 
+                    inner ysep=10pt
+                    ]
+\tikzstyle{recipe-title} = [  font=\sffamily\large, 
+                    fill=thirdblue,
+                    text=white
+                    ]
+\tikzstyle{recipe-logo} = [  font=\sffamily\large, 
+                    fill=thirdblue,
+                    rectangle,
+                    rounded corners,
+                    draw = thirdblue
+                    ]
+
+\tikzstyle{logbook-logo} = [  font=\sffamily\large, 
+                    fill=bettergrey,
+                    rectangle,
+                    rounded corners,
+                    draw = bettergrey
+                    ]
+
+
+\newcommand{\ladle}{\protect\includegraphics[height = 4ex]{images/little_insets/ladle.png}}
+\newcommand{\logbook}{\protect\includegraphics[height = 4ex]{images/little_insets/logbook.png}}
+\newcommand{\explo}{\protect\includegraphics[height = 4ex]{images/little_insets/helmet.png}}
+\newcommand{\calc}{\protect\includegraphics[height = 4ex]{images/little_insets/calc.png}}
+\newcommand{\dig}{\protect\includegraphics[height = 4ex]{images/little_insets/dig.png}}
+\newcommand{\note}{\raisebox{-1ex}{\protect\includegraphics[height = 5ex]{images/little_insets/notes.png}} \qquad}
+\newcommand{\enote}{\qquad \raisebox{-1ex}{\protect\includegraphics[height = 5ex]{images/little_insets/notes2.png}}}
+
+
+\newcommand{\pic}[1]{\raisebox{-0.2em}{\protect\includegraphics[height = 2ex]{images/little_insets/pic.png}}~\hskip0.15em \emph{#1}\relax}
+
+\newcommand{\pen}[1]{\raisebox{-0.2em}{\protect\includegraphics[height = 2ex]{images/little_insets/pen.png}}~\emph{#1}\relax}
+\newcommand{\recipecorner}[2]{
+                        \begin{marginfigure}
+                        \begin{tikzpicture}
+                        \node [recipe] (box){%
+                            \begin{minipage}{0.9\textwidth}
+                            \vspace{5pt}
+                            \sffamily\textcolor{thirdblue!}{#2}
+                            \end{minipage}
+                        };
+                        \node[recipe-title, right=30pt] at (box.north west) {#1};
+                        \node[recipe-logo, right=5pt] at (box.north west) {\ladle}; 
+                        \end{tikzpicture}
+                        \end{marginfigure}
+}
+
+
+
+\tikzstyle{name-dest} = [   draw=bettergrey!80, 
+                    fill=bettergrey!20, 
+                    thick,
+                    rectangle, 
+                    rounded corners, 
+                    inner sep=5pt, 
+                    inner ysep=10pt
+                    ]
+                    
+\tikzstyle{fancytitle} =     [  font=\sffamily\large, 
+                    fill=bettergrey,
+                    text=white
+                    ]
+
+\tikzstyle{table} = [       draw={thirdblue!80},
+                    fill={thirdblue!20},
+                    thick,
+                    rectangle, 
+                    rounded corners, 
+                    inner sep=5pt, 
+                    inner ysep=10pt
+                    ]
+                    
+\tikzstyle{tabletitle} = [  font=\sffamily\large,
+                    fill={thirdblue},
+                    text=white
+                    ]
+\newcommand{\numbertable}[1]{
+                        \begin{figure*}[h!]
+                        \begin{tikzpicture}
+                        \node [table] (box){%
+                            \begin{minipage}{\textwidth}
+                            \centering
+                            \vspace{5pt}
+                            
+
+                        #1
+                            \end{minipage}
+                        };
+                        \node[tabletitle, right=30pt] at (box.north west) {Number Crunching};
+                        \node[recipe-logo, right=5pt] at (box.north west) {\calc}; 
+                        \end{tikzpicture}
+                        \end{figure*}
+    
+}                    
+\newcommand{\margininbox}[3]{
+                        \begin{marginfigure}
+                        \begin{tikzpicture}
+                        \node [name-dest] (box){%
+                            \begin{minipage}{0.95\textwidth}
+                            \vspace{5pt}
+                            \normalsize{#2}
+                            \end{minipage}
+                        };
+                        \node[fancytitle, right=30pt] at (box.north west) {#1};
+                        \node[logbook-logo, right = 5pt] at(box.north west) {\protect#3};
+                        \end{tikzpicture}
+                        \end{marginfigure}
+}
+
+
+
+\newcommand{\fullwidthbox}[2]{
+   \begin{figure*}[t!]        
+        \begin{tikzpicture}
+            \node [name-dest] (box){%
+                \begin{minipage}{\textwidth}
+                \vspace{5pt}
+                    \begin{multicols}{2}
+                    #2
+                  \end{multicols}
+                \end{minipage}
+            };
+            \node[fancytitle, right=30pt] at (box.north west) {#1};
+            \node[logbook-logo, right = 5pt] at(box.north west) {\logbook};
+        \end{tikzpicture}
+    \end{figure*}
+}
+
+%__________________End of the definition of: Tikz environments for side stories and fancy tables    
+
+%____________________THE TWO PAGE BACKGROUND MACRO (from:https://tex.stackexchange.com/questions/23860/how-to-include-a-picture-over-two-pages-left-part-on-left-side-right-on-right).
+\usepackage{adjustbox}
+\usepackage{afterpage}
+\usepackage{placeins}
+
+
+\setcounter{totalnumber}{1}
+\setcounter{topnumber}{1}
+\setcounter{bottomnumber}{1}
+\renewcommand{\topfraction}{.99}
+\renewcommand{\bottomfraction}{.99}
+\renewcommand{\textfraction}{.01}
+\newcommand*\cleartoleftpage{%
+  \clearpage
+  \ifodd\value{page}\hbox{}\newpage\fi
+}
+
+\fancypagestyle{endchapter}{%
+  \fancyhf{}% Clear header/footer
+  \fancyfoot[OR]{\textbf{\thepage}}%
+  \fancyfoot[EL]{\textbf{\thepage}}%
+  \renewcommand{\headrulewidth}{0pt}%
+}
+
+%changing the spacing of itemize (also ...)
+\usepackage{enumitem}
+\newcommand{\localtextbulletone}{\textcolor{bettergrey}{\raisebox{.45ex}{\rule{.6ex}{.6ex}}}}
+\renewcommand{\labelitemi}{\localtextbulletone}
+\newenvironment{citemize}{\begin{itemize}[itemsep=0.25ex,leftmargin=0.5cm, rightmargin=0.5cm, label=\localtextbulletone]}{\end{itemize}}
