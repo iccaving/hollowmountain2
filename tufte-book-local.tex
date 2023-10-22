@@ -111,11 +111,12 @@
             bottom=10pt,
             colback=white,
             colframe=white,
-        width=\dimexpr\textwidth\relax,
+            width=\dimexpr\textwidth\relax,
             enlarge left by=0mm,
             boxsep=5pt,
-            arc=0pt,outer arc=0pt,
-            opacityback=0.7
+            arc=0pt,
+            outer arc=0pt,
+            opacityback=0.8,
         }
         
 
@@ -142,6 +143,26 @@
                     draw = thirdblue
                     ]
 
+\tikzstyle{tweet-content} = [   draw=thirdblue!80, 
+                    fill=thirdblue!20, 
+                    thick,
+                    rectangle, 
+                    rounded corners, 
+                    inner sep=5pt, 
+                    inner ysep=10pt
+                    ]
+\tikzstyle{tweet-time} = [  font=\sffamily\large, 
+                    fill=thirdblue,
+                    text=white
+                    ]
+\tikzstyle{tweet-logo} = [  font=\sffamily\large, 
+                    fill=thirdblue,
+                    rectangle,
+                    rounded corners,
+                    draw = thirdblue
+                    ]
+
+
 \tikzstyle{logbook-logo} = [  font=\sffamily\large, 
                     fill=bettergrey,
                     rectangle,
@@ -151,6 +172,7 @@
 
 
 \newcommand{\ladle}{\protect\includegraphics[height = 4ex]{icons/ladle.png}}
+\newcommand{\tweetbird}{\protect\includegraphics[height = 4ex]{icons/bird.png}}
 \newcommand{\logbook}{\protect\includegraphics[height = 4ex]{icons/logbook.png}}
 \newcommand{\explo}{\protect\includegraphics[height = 4ex]{icons/helmet.png}}
 \newcommand{\calc}{\protect\includegraphics[height = 4ex]{icons/calc.png}}
@@ -167,12 +189,26 @@
                         \begin{tikzpicture}
                         \node [recipe] (box){%
                             \begin{minipage}{0.9\textwidth}
-                            \vspace{5pt}
+                            \vspace{8pt}
                             \sffamily\textcolor{thirdblue!}{#2}
                             \end{minipage}
                         };
                         \node[recipe-title, right=30pt] at (box.north west) {#1};
                         \node[recipe-logo, right=5pt] at (box.north west) {\ladle}; 
+                        \end{tikzpicture}
+                        \end{marginfigure}
+}
+\newcommand{\tweet}[2]{
+                        \begin{marginfigure}
+                        \begin{tikzpicture}
+                        \node [tweet-content] (box){%
+                            \begin{minipage}{0.95\textwidth}
+                            \vspace{8pt}
+                            \normalsize\textcolor{thirdblue!}{#2}
+                            \end{minipage}
+                        };
+                        \node[tweet-time, right=30pt] at (box.north west) {#1};
+                        \node[tweet-logo, right=5pt] at (box.north west) {\tweetbird}; 
                         \end{tikzpicture}
                         \end{marginfigure}
 }
@@ -229,7 +265,7 @@
                         \begin{tikzpicture}
                         \node [name-dest] (box){%
                             \begin{minipage}{0.95\textwidth}
-                            \vspace{5pt}
+                            \vspace{8pt}
                             \normalsize{#2}
                             \end{minipage}
                         };

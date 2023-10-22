@@ -9,9 +9,11 @@
 %  synced, but we went with overleaf since it's easier for
 %  those who aren't used to hardcore code wrangling.
 % 
+% USE THE WEBSITE FOR HM2 CONTENT STORAGE
+%
 %  To do list:
 %  
-%  Look around on club website and drive for any content not in this book already
+%  Look around on club website and drive and check the Migovec Blog for any content not in this book already
 % 
 %  Read through 2010 interim report (already here, see the 2010 chapter) and extract any new content from it
 % 
@@ -21,7 +23,30 @@
 % 
 %  Remove UG logbook section and add the quotes to other sections
 % 
-%  Design a front and back cover jpg
+%  Design a front and back cover jpg for the print edition
+% 
+%  Find an actual picture to go on page 1, I just picked a random one from 2023
+%
+%  Hunt down the Twitter account from these years for extra content
+%  Look up whether the tweets were 
+% 
+%  Get all the photos from the Facebook pages
+% 
+%  Fiona to double-check legacy wiki
+%
+%  Double check what's recorded at end of HM1
+%
+%  Make a custom tweet command thingy like Tanguy's logbook quote one
+%
+%  ALEX PITCHER: Add Alex Pitcher award reports for 2012 - Sam and Rhys, available in Union tour Report; background on the Alex Pitcher award and Ghar Parau
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Setup stuff
 % 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -119,12 +144,18 @@
 %__________________End of the definition of: Tikz environments for side stories and fancy tables	
 \usepackage{tikz-3dplot}
 
-%________________________________ Document Start
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% Actual book contents
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 
 \frontmatter 
 \maketitle %Title page
-
 \justify
 
 %________________________________ Dedication
@@ -140,7 +171,7 @@ This book is probably dedicated to someone. We should apply more thought to this
 \vfill
 
 %________________________________ Intro
-\include{introduction/editorial}
+\include{editorial/editorial}
 \newpage
 
 \setfloatalignment{b} %puts the caption in line with the bottom of the floats for the whole doc.
@@ -164,21 +195,21 @@ This book is probably dedicated to someone. We should apply more thought to this
 \include{appendices/logistics/logistics}
 \include{appendices/ug_logbook/ug_logbook}
 
-% \backmatter
+\backmatter
 % 	\input{text/Part3}
 % 	    \clearpage
 %         	\include{text/sponsorships_and_thanks}
 % 	\include{text/hall-of-fame}
 % 	\include{text/other_tex_files/Post-script}
 	
-% 	\label{Bibliography}
-% 	\bibliographystyle{apalike}
-% 	\bibliography{bib/biblio_hm3}
+	% \label{Bibliography}
+	% \bibliographystyle{apalike}
+	% \bibliography{bib copied from hm3/biblio_hm3}
 	
-% 	\listofsurveys
-% 	\listofmaps
-% 	%\printindex[aut]
-%    	 \printindex
+	\listofsurveys
+	\listofmaps
+	% \printindex[aut]
+    \printindex
    	
     
 
