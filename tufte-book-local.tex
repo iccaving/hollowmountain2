@@ -177,6 +177,7 @@
 \newcommand{\explo}{\protect\includegraphics[height = 4ex]{icons/helmet.png}}
 \newcommand{\calc}{\protect\includegraphics[height = 4ex]{icons/calc.png}}
 \newcommand{\dig}{\protect\includegraphics[height = 4ex]{icons/dig.png}}
+\newcommand{\award}{\protect\includegraphics[height = 4ex]{icons/trophy.png}}
 \newcommand{\note}{\raisebox{-1ex}{\protect\includegraphics[height = 5ex]{icons/notes.png}} \qquad}
 \newcommand{\enote}{\qquad \raisebox{-1ex}{\protect\includegraphics[height = 5ex]{icons/notes2.png}}}
 
@@ -188,7 +189,7 @@
                         \begin{marginfigure}
                         \begin{tikzpicture}
                         \node [recipe] (box){%
-                            \begin{minipage}{0.9\textwidth}
+                            \begin{minipage}{0.95\textwidth}
                             \vspace{8pt}
                             \sffamily\textcolor{thirdblue!}{#2}
                             \end{minipage}
@@ -277,22 +278,32 @@
 
 
 
-\newcommand{\fullwidthbox}[2]{
+% Define a new command with three arguments, the last one being optional.
+% If the third argument is not provided, the default icon (\logbook) is used.
+\newcommand{\fullwidthbox}[3][\logbook]{%
    \begin{figure*}[t!]        
         \begin{tikzpicture}
             \node [name-dest] (box){%
                 \begin{minipage}{\textwidth}
                 \vspace{5pt}
                     \begin{multicols}{2}
-                    #2
-                  \end{multicols}
+                    #3
+                    \end{multicols}
                 \end{minipage}
             };
-            \node[fancytitle, right=30pt] at (box.north west) {#1};
-            \node[logbook-logo, right = 5pt] at(box.north west) {\logbook};
+            \node[fancytitle, right=30pt] at (box.north west) {#2};
+            % Use the first argument as the icon, which is the optional one
+            % with the default value being \logbook
+            \node[logbook-logo, right = 5pt] at(box.north west) {#1};
         \end{tikzpicture}
     \end{figure*}
 }
+
+% Usage:
+% \fullwidthbox{Title}{Content} for default icon
+% \fullwidthbox[CustomIcon]{Title}{Content} for a custom icon
+
+
 
 %__________________End of the definition of: Tikz environments for side stories and fancy tables    
 

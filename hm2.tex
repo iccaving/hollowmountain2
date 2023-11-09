@@ -15,31 +15,31 @@
 %  
 %  Look around on club website and drive and check the Migovec Blog for any content not in this book already
 % 
+%  Same for Facebook groups and events, legacy site wiki, actual website (super actions, winter recces), JSPDT website, 2008 newsletter
+%
 %  Read through 2010 interim report (already here, see the 2010 chapter) and extract any new content from it
 % 
 %  Add photos to all the sections from the club website
 % 
 %  Fix formatting so it looks like HM3 (quotes, recipes, songs etc.)
+%
+%  Outros for all chapters
 % 
-%  Remove UG logbook section and add the quotes to other sections
+%  Remove UG logbook section and add the quotes to other chapters 2010-2012
 % 
 %  Design a front and back cover jpg for the print edition
-% 
-%  Find an actual picture to go on page 1, I just picked a random one from 2023
 %
 %  Hunt down the Twitter account from these years for extra content
 %  Look up whether the tweets were 
 % 
-%  Get all the photos from the Facebook pages
-% 
-%  Fiona to double-check legacy wiki
-%
 %  Double check what's recorded at end of HM1
 %
-%  Make a custom tweet command thingy like Tanguy's logbook quote one
+%  Write postscript regarding the process of Operation Finish HM2
 %
-%  ALEX PITCHER: Add Alex Pitcher award reports for 2012 - Sam and Rhys, available in Union tour Report; background on the Alex Pitcher award and Ghar Parau
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Parse exploboard 2007 into anything relvant
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -186,21 +186,22 @@ This book is probably dedicated to someone. We should apply more thought to this
 \input{2008/2008}
 \input{2009/2009}
 \input{2010/2010}
-\input{2011/2011}
-\input{2012/2012}
+%\input{2011/2011}
+%\input{2012/2012}
 
 %________________________________ Outro
 
 \include{epilogue/epilogue}
 \include{appendices/logistics/logistics}
-\include{appendices/ug_logbook/ug_logbook}
+\include{appendices/rainfall_response/rainfall_response}
+\include{appendices/Slovenian/Slovenian}
 
 \backmatter
 % 	\input{text/Part3}
 % 	    \clearpage
-%         	\include{text/sponsorships_and_thanks}
-% 	\include{text/hall-of-fame}
-% 	\include{text/other_tex_files/Post-script}
+%         	\include{sponsorships_and_thanks}
+% 	\include{hall_of_fame/hall_of_fame}
+% 	\include{postscript/postscript}
 	
 	% \label{Bibliography}
 	% \bibliographystyle{apalike}
@@ -209,6 +210,9 @@ This book is probably dedicated to someone. We should apply more thought to this
 	\listofsurveys
 	\listofmaps
 	% \printindex[aut]
+
+    % Adding this fixes the index for some reason (...?)
+    \passage[|see{}]{}
     \printindex
    	
     
